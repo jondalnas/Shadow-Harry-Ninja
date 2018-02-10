@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 62d295cf5d69cfd4f9a0e881dccd4d08
-timeCreated: 1518094073
+timeCreated: 1518294306
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -36,7 +36,7 @@ TextureImporter:
     21300058: Sprite Sheet_37
     21300060: Sprite Sheet_38
     21300062: Sprite Sheet_39
-    21300064: Sprite Sheet_40
+    21300064: Hair_Grab_0
     21300066: Sprite Sheet_41
     21300068: Sprite Sheet_42
     21300070: Sprite Sheet_43
@@ -44,7 +44,7 @@ TextureImporter:
     21300074: Sprite Sheet_45
     21300076: Sprite Sheet_46
     21300078: Sprite Sheet_47
-    21300080: Sprite Sheet_48
+    21300080: Hair_Grab_1
     21300082: Sprite Sheet_49
     21300084: Sprite Sheet_50
     21300086: Sprite Sheet_51
@@ -52,7 +52,7 @@ TextureImporter:
     21300090: Sprite Sheet_53
     21300092: Sprite Sheet_54
     21300094: Sprite Sheet_55
-    21300096: Sprite Sheet_56
+    21300096: Hair_Grab_2
     21300098: Sprite Sheet_57
     21300100: Sprite Sheet_58
     21300102: Sprite Sheet_59
@@ -558,28 +558,15 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sprite Sheet_40
+      name: Hair_Grab_0
       rect:
         serializedVersion: 2
         x: 0
         y: 32
-        width: 16
+        width: 32
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Sprite Sheet_41
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -662,28 +649,15 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sprite Sheet_48
+      name: Hair_Grab_1
       rect:
         serializedVersion: 2
         x: 0
         y: 16
-        width: 16
+        width: 32
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Sprite Sheet_49
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -766,28 +740,15 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Sprite Sheet_56
+      name: Hair_Grab_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
+        width: 32
         height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Sprite Sheet_57
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

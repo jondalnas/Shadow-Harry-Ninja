@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class EnemyController : MonoBehaviour
+{
 	public int movementSpeed;
 	public float animationDeadZone = 0.2f;
 	public GameObject hair;
@@ -13,13 +14,14 @@ public class PlayerController : MonoBehaviour {
 	float hairLength;
 	float attackTime = 0;
 	bool retracting;
+	float move;
 
 	Rigidbody2D rb;
 	Animator anim;
 	SpriteRenderer srHair;
 	GameObject fist;
 
-	void Start () {
+	void Start() {
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
 		srHair = hair.GetComponent<SpriteRenderer>();
@@ -34,7 +36,7 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate() {
 		//Movment calculations
 		if (attackTime == 0) {
-			rb.velocity = new Vector2(Input.GetAxis("Horizontal") * movementSpeed, rb.velocity.y);
+			rb.velocity = new Vector2(move * movementSpeed, rb.velocity.y);
 			if (Mathf.Abs(rb.velocity.x) > animationDeadZone) {
 				anim.SetBool("Walking", true);
 
@@ -46,7 +48,7 @@ public class PlayerController : MonoBehaviour {
 		} else anim.SetBool("Walking", false);
 
 		//Attack
-		if (attackTime < maximumAttackTime && (Input.GetButton("Lower body") || (attackTime > 0 && attackTime < minimumAttackTime))) {
+		if (attackTime < maximumAttackTime && (/*Input.GetButton("Lower body")*/ false || (attackTime > 0 && attackTime < minimumAttackTime))) {
 			hairLength += hairSpeed;
 			attackTime += Time.deltaTime;
 			hair.SetActive(true);
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour {
 
 		//Retract hair
 		if (retracting) {
-			hairLength -= hairSpeed*3;
+			hairLength -= hairSpeed * 3;
 
 			if (hairLength < 0) {
 				retracting = false;
@@ -66,7 +68,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		srHair.size = Vector2.right*hairLength+Vector2.up*srHair.size.y;
+		srHair.size = Vector2.right * hairLength + Vector2.up * srHair.size.y;
 
 		fist.transform.localPosition = new Vector3(hairLength, fist.transform.localPosition.y, fist.transform.localPosition.z);
 	}
