@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HairFist : MonoBehaviour {
+public class HairGrab : MonoBehaviour {
 
 	// Use this for initialization
 	void Start() {
@@ -16,7 +16,6 @@ public class HairFist : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col) {
 		if (col.gameObject.CompareTag("Enemy")) {
-			Debug.Log(col.tag);
 			transform.parent.parent.GetComponent<PlayerController>().Grab(col.gameObject);
 		}
 	}

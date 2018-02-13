@@ -5,35 +5,56 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 	public float minimumSize = 5.0f, maximumSize = 25.0f;
 	public float distancePadding = 5.0f;
-
-	GameObject player;
-	GameObject enemy;
+	public float cameraZoomSpeed = 0.5f;
+	
 	GameObject gameCamera;
-	float scaleFactor;
+	float scaleFactorX;
+	float scaleFactorY;
+	float realSize;
 
 	public static bool TOO_FAR_AWAY;
+	public static bool DO_NOT_UPDATE_CAMERA;
 
 	// Use this for initialization
-	void Start () {
-		player = GameObject.Find("Player");
-		enemy = GameObject.Find("Enemy");
+	void Start() {
 		gameCamera = Camera.main.gameObject;
 
-		scaleFactor = (Camera.main.GetComponent<Camera>().ViewportToWorldPoint(Vector3.right).x*2.0f)/Camera.main.GetComponent<Camera>().orthographicSize;
+		scaleFactorX = (Camera.main.GetComponent<Camera>().ViewportToWorldPoint(Vector3.right).x * 2.0f) / Camera.main.GetComponent<Camera>().orthographicSize;
+		scaleFactorY = (Camera.main.GetComponent<Camera>().ViewportToWorldPoint(Vector3.up).y-Camera.main.transform.position.y) / Camera.main.GetComponent<Camera>().orthographicSize;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		//Camera Size
-		float distance = player.transform.position.x - enemy.transform.position.x;
+	void FixedUpdate() {
+		if (DO_NOT_UPDATE_CAMERA) return;
 
-		float size = Mathf.Abs(distance - distancePadding) /scaleFactor;
+		//Camera Size
+		float distance = PlayerScores.player.transform.position.x - PlayerScores.enemy.transform.position.x;
+
+		float size;
+
+		//Size based on x distance
+		float sizeX = Mathf.Abs(distance + distancePadding * ((distance < 0) ? -1 : 1)) / scaleFactorX;
+
+		float sizeY = ((PlayerScores.enemy.transform.position.y>PlayerScores.player.transform.position.y?PlayerScores.enemy.transform.position.y:PlayerScores.player.transform.position.y)+8) / scaleFactorY * 0.5f;
+		
+		if (sizeX < sizeY) size = sizeY;
+		else size = sizeX;
+
 		size = Mathf.Clamp(size, minimumSize, maximumSize);
-		if (size == maximumSize) TOO_FAR_AWAY = true;
+
+		if (sizeX >= maximumSize) TOO_FAR_AWAY = true;
 		else TOO_FAR_AWAY = false;
-		gameCamera.GetComponent<Camera>().orthographicSize = size;
+		
+		if (realSize < size) {
+			realSize = size;
+		} else {
+			realSize -= cameraZoomSpeed * Time.deltaTime;
+
+			if (realSize < size) realSize = size;
+		}
+
+		gameCamera.GetComponent<Camera>().orthographicSize = realSize;
 
 		//Camera Position
-		gameCamera.transform.position = new Vector3((player.transform.position.x - distance / 2.0f), gameCamera.transform.position.y, gameCamera.transform.position.z);
+		gameCamera.transform.position = new Vector3((PlayerScores.player.transform.position.x - distance / 2.0f), Camera.main.GetComponent<Camera>().orthographicSize * scaleFactorY-5, gameCamera.transform.position.z);
 	}
 }

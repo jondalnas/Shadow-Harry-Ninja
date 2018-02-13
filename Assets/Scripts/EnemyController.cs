@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-	public int movementSpeed;
+	public float movementSpeed;
+	public float maximumPlayerSpeed = 20.0f;
 	public float animationDeadZone = 0.2f;
 	public GameObject hair;
 	public float hairSpeed = 0.01f;
@@ -30,13 +31,18 @@ public class EnemyController : MonoBehaviour
 
 	private void Update() {
 		//Attack
-
 	}
 
 	void FixedUpdate() {
+		//Update direction
+		int direction = (int)((transform.position.x - PlayerScores.player.transform.position.x) * Vector3.right).normalized.x;
+
+		transform.localScale = new Vector3(-direction, transform.localScale.y, transform.localScale.z);
+
 		//Movment calculations
 		if (attackTime == 0) {
-			rb.velocity = new Vector2(move * movementSpeed, rb.velocity.y);
+			if (Mathf.Abs(rb.velocity.x) < maximumPlayerSpeed) rb.velocity += new Vector2(move * movementSpeed, 0);
+
 			if (Mathf.Abs(rb.velocity.x) > animationDeadZone) {
 				anim.SetBool("Walking", true);
 
