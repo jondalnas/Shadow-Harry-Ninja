@@ -14,8 +14,9 @@ public class HairAttack : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-		if (col.gameObject.CompareTag("Enemy"))	{
-			transform.parent.parent.GetComponent<PlayerController>().Hit(col.gameObject);
+		if (col.gameObject.layer == LayerMask.NameToLayer("Character")) {
+			if (transform.parent.parent.CompareTag("Player")) transform.parent.parent.GetComponent<PlayerController>().Hit(col.gameObject);
+			if (transform.parent.parent.CompareTag("Enemy")) transform.parent.parent.GetComponent<EnemyController>().Hit(col.gameObject);
 		}
 	}
 }

@@ -8,17 +8,41 @@ public class PlayerScores : MonoBehaviour {
 
 	public static GameObject player, enemy;
 
-	// Use this for initialization
+	public float healthLoosingRate = 10f;
+
+	private static float targetPlayerHealth, targetEnemyHealth;
+	
 	void Start () {
 		playerHP = playerMaxHP;
 		enemyHP = enemyMaxHP;
+		targetPlayerHealth = playerMaxHP;
+		targetEnemyHealth = enemyMaxHP;
 
 		player = GameObject.Find("Player");
 		enemy = GameObject.Find("Enemy");
 	}
 	
-	// Update is called once per frame
 	void Update () {
-		
+		if (playerHP > targetPlayerHealth) {
+			playerHP -= healthLoosingRate * Time.deltaTime;
+			if (playerHP < targetPlayerHealth) {
+				playerHP = targetPlayerHealth;
+			}
+		}
+
+		if (enemyHP > targetEnemyHealth) {
+			enemyHP -= healthLoosingRate*Time.deltaTime;
+			if (enemyHP < targetEnemyHealth) {
+				enemyHP = targetEnemyHealth;
+			}
+		}
+	}
+
+	public static void hurtPlayer(float damage) {
+		targetPlayerHealth -= damage;
+	}
+
+	public static void hurtEnemy(float damage) {
+		targetEnemyHealth -= damage;
 	}
 }
