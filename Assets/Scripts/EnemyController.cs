@@ -71,6 +71,11 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+		if (PlayerScores.IS_DEAD) {
+			anim.enabled = false;
+			return;
+		}
+
 		stun -= Time.deltaTime;
 		if (stun > 0) return;
 
@@ -261,6 +266,8 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	public void TakeDamage(float damage, Vector3 direction) {
+		anim.SetTrigger("Hit");
+
 		if (!blocking) {
 			PlayerScores.hurtEnemy(damage);
 			rb.AddForce(direction);

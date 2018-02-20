@@ -71,6 +71,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+		if (PlayerScores.IS_DEAD) {
+			anim.enabled = false;
+			return;
+		}
+
 		stun -= Time.deltaTime;
 		if (stun > 0) return;
 
@@ -253,12 +258,12 @@ public class PlayerController : MonoBehaviour {
 		if (coolDownTimer < coolDown) return;
 		coolDownTimer = 0;
 
-		anim.SetTrigger("Hit");
-
 		enemy.GetComponent<EnemyController>().TakeDamage(headAttackDamage, Input.GetAxis("Vertical") > 0.0f?(new Vector2(0.1f * -direction, 1.2f) * headAttackForce):(new Vector2(1f * -direction, 0.5f) * headAttackForce));
 	}
 
 	public void TakeDamage(float damage, Vector3 direction) {
+		anim.SetTrigger("Hit");
+
 		if (!blocking) {
 			PlayerScores.hurtPlayer(damage);
 			rb.AddForce(direction);
