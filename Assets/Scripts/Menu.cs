@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour {
 	public int playerOne;
 	public int playerTwo;
+	public int level;
 
 	public int currentlyPicking;
 
@@ -22,10 +23,17 @@ public class Menu : MonoBehaviour {
 		} else if (currentlyPicking == 1) {
 			playerTwo = index;
 
-			SceneManager.LoadScene(1);
+			GameObject.Find("Play").transform.parent.Find("Level Select").gameObject.SetActive(true);
+			GameObject.Find("Play").SetActive(false);
 		}
 
 		currentlyPicking++;
+	}
+
+	public void LoadLevel(int index) {
+		level = index;
+
+		SceneManager.LoadScene(1);
 	}
 
 	public void ResetPlayerSelect() {

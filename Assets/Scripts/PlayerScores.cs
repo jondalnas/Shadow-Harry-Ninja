@@ -49,6 +49,8 @@ public class PlayerScores : MonoBehaviour {
 	private void Die() {
 		gameEnd.SetActive(true);
 
+		GameObject.Find("-SOUND-").GetComponent<AudioSource>().mute = true;
+
 		if (targetPlayerHealth <= 0) gameEnd.transform.Find("Text").GetComponent<Text>().text = "YOU LOSE!";
 		if (targetEnemyHealth <= 0) gameEnd.transform.Find("Text").GetComponent<Text>().text = "YOU WIN!";
 
